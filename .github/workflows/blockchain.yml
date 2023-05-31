@@ -20,5 +20,11 @@ jobs:
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: Init BlockChain
+        env:
+          BLOCKCHAIN_FILE_PATH: /storage/app/blockchain-test.txt
+        run: php artisan generate:blockchain_with_block
       - name: Execute tests (Unit and Feature tests) via PHPUnit
+        env:
+          BLOCKCHAIN_FILE_PATH: /storage/app/blockchain-test.txt
         run: vendor/bin/phpunit
