@@ -4,13 +4,6 @@ namespace Tests;
 
 class ApiTest extends TestCase
 {
-    public function __construct(string $name)
-    {
-        parent::__construct($name);
-
-
-    }
-
     /**
      * A basic test example.
      *
