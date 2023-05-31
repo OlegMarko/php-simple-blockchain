@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\Chain\Storage;
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
@@ -46,6 +48,11 @@ $app->singleton(
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
+);
+
+$app->singleton(
+    Storage\Storage::class,
+    Storage\FileStorage::class
 );
 
 /*

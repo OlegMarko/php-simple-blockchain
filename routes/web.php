@@ -13,6 +13,7 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->group(['prefix' => 'blockchain'], function () use ($router) {
+    $router->get('show', 'BlockChainController@show');
+    $router->post('create', 'BlockChainController@create');
 });

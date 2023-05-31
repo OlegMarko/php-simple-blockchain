@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Chain\BlockChainGeneratorCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        BlockChainGeneratorCommand::class
     ];
 
     /**
