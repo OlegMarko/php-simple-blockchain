@@ -10,16 +10,16 @@ use App\Services\Chain\ChainService;
 class BlockService
 {
     private ChainService $chainService;
-    private Hasher $hasher;
+    private BlockHasher $blockHasher;
 
     /**
      * @param ChainService $chainService
-     * @param Hasher $hasher
+     * @param BlockHasher $blockHasher
      */
-    public function __construct(ChainService $chainService, Hasher $hasher)
+    public function __construct(ChainService $chainService, BlockHasher $blockHasher)
     {
         $this->chainService = $chainService;
-        $this->hasher = $hasher;
+        $this->blockHasher = $blockHasher;
     }
 
     /**
@@ -35,7 +35,7 @@ class BlockService
 
         $block = new Block($index, $prevHash, $data);
 
-        $hash = $this->hasher->calculateHash($block);
+        $hash = $this->blockHasher->calculateHash($block);
         $block->setHash($hash);
 
         return $block;

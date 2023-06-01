@@ -52,7 +52,7 @@ $app->singleton(
 
 $app->singleton(
     Storage\Storage::class,
-    Storage\FileStorage::class
+    Storage\RedisStorage::class
 );
 
 /*
@@ -67,6 +67,7 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('database');
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,11 @@ $app->configure('app');
 | totally optional, so you are not required to uncomment this line.
 |
 */
+
+//$app->withFacades();
+//$app->withEloquent();
+
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);

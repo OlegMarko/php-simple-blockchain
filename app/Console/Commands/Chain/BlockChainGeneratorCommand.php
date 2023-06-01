@@ -6,7 +6,7 @@ namespace App\Console\Commands\Chain;
 
 use App\Entity\Block;
 use App\Entity\Chain;
-use App\Services\Block\Hasher;
+use App\Services\Block\BlockHasher;
 use App\Services\Chain\ChainService;
 use Illuminate\Console\Command;
 
@@ -17,13 +17,13 @@ class BlockChainGeneratorCommand extends Command
     protected $description = 'Create new blockchain with genesis block';
 
     private ChainService $chainService;
-    private Hasher $blockHasher;
+    private BlockHasher $blockHasher;
 
     /**
      * @param ChainService $chainService
-     * @param Hasher $blockHasher
+     * @param BlockHasher $blockHasher
      */
-    public function __construct(ChainService $chainService, Hasher $blockHasher)
+    public function __construct(ChainService $chainService, BlockHasher $blockHasher)
     {
         parent::__construct();
 

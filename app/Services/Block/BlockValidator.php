@@ -8,14 +8,14 @@ use App\Entity\Block;
 
 class BlockValidator
 {
-    private Hasher $hasher;
+    private BlockHasher $blockHasher;
 
     /**
-     * @param Hasher $hasher
+     * @param BlockHasher $blockHasher
      */
-    public function __construct(Hasher $hasher)
+    public function __construct(BlockHasher $blockHasher)
     {
-        $this->hasher = $hasher;
+        $this->blockHasher = $blockHasher;
     }
 
     /**
@@ -33,7 +33,7 @@ class BlockValidator
             return false;
         }
 
-        if ($this->hasher->calculateHash($newBlock) !== $newBlock->getHash()) {
+        if ($this->blockHasher->calculateHash($newBlock) !== $newBlock->getHash()) {
             return false;
         }
 

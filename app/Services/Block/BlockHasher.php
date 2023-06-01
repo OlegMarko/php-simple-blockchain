@@ -6,7 +6,7 @@ namespace App\Services\Block;
 
 use App\Entity\Block;
 
-class Hasher
+class BlockHasher
 {
     /**
      * @param Block $block
