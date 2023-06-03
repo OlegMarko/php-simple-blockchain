@@ -1,0 +1,47 @@
+services:
+  web-blockchain:
+    image: nginx:latest
+    container_name: web-blockchain
+    restart: on-failure:5
+    ports:
+      - "8888:80"
+    volumes:
+      - ./:/var/www/app
+      - ./nginx/default-blockchain.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php-fpm-blockchain
+    depends_on:
+      - php-fpm-blockchain
+    networks:
+      - blockchain-net
+  php-fpm-blockchain:
+    build:
+      context: .
+      args:
+        - USER_ID
+        - GROUP_ID
+    container_name: blockchain-fpm-blockchain
+    restart: on-failure:5
+    command: >
+      sh -c "cd /var/www/app && composer install && php-fpm -F -R"
+    volumes:
+      - ./:/var/www/app
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+    links:
+      - redis
+    networks:
+      - blockchain-net
+  redis:
+    image: redis:alpine
+    platform: ${PLATFORM}
+    container_name: blockchain-redis
+    restart: on-failure:5
+    networks:
+      - blockchain-net
+
+networks:
+  blockchain-net:
+    driver: bridge
