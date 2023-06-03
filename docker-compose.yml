@@ -20,7 +20,7 @@ services:
       args:
         - USER_ID
         - GROUP_ID
-    container_name: blockchain-fpm-blockchain
+    container_name: php-fpm-blockchain
     restart: on-failure:5
     command: >
       sh -c "cd /var/www/app && composer install && php-fpm -F -R"
@@ -37,7 +37,7 @@ services:
   redis:
     image: redis:alpine
     platform: ${PLATFORM}
-    container_name: blockchain-redis
+    container_name: redis-blockchain
     restart: on-failure:5
     networks:
       - blockchain-net
